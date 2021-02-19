@@ -31,12 +31,13 @@ vaddr_t tee_svc_uref_base;
 void syscall_log(const void *buf __maybe_unused, size_t len __maybe_unused)
 {
 #ifdef CFG_TEE_CORE_TA_TRACE
-	char *kbuf;
+	char *kbuf = NULL;
+	size_t l = 0;
 
-	if (len == 0)
+	if (len == 0 || ADD_OVERFLOW(len, 1, &l))
 		return;
 
-	kbuf = malloc(len + 1);
+	kbuf = malloc(l);
 	if (kbuf == NULL)
 		return;
 
