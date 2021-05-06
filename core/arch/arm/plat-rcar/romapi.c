@@ -110,8 +110,8 @@ uint32_t plat_rom_getrndvector(uint8_t rndbuff[PLAT_RND_VECTOR_SZ],
 	paddr_t scratch_pa = va2pa(scratch);
 
 	assert(scratch_sz >= 4096);
-	assert(rndbuff_pa % 8 == 0);
-	assert(scratch_pa % 8 == 0);
+	assert(rndbuff_pa % RCAR_CACHE_LINE_SZ == 0);
+	assert(scratch_pa % RCAR_CACHE_LINE_SZ == 0);
 
 	ret = plat_call_romapi(func_addr, rndbuff_pa, scratch_pa, scratch_sz);
 

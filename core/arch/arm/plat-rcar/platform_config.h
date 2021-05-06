@@ -31,8 +31,10 @@
 
 #include <mm/generic_ram_layout.h>
 
+#define RCAR_CACHE_LINE_SZ		64
+
 /* Make stacks aligned to data cache line length */
-#define STACK_ALIGNMENT		64
+#define STACK_ALIGNMENT		RCAR_CACHE_LINE_SZ
 
 #define GIC_BASE		0xF1000000
 #define GICC_BASE		0xF1020000
