@@ -12,7 +12,8 @@
 
 #define SCRATCH_BUF_SZ		4096
 
-static uint8_t scratch_buf[SCRATCH_BUF_SZ] __nex_bss __aligned(64);
+static uint8_t scratch_buf[SCRATCH_BUF_SZ] __nex_bss \
+					__aligned(RCAR_CACHE_LINE_SZ);
 
 static unsigned int spin_lock __nex_data = SPINLOCK_UNLOCK;
 
@@ -20,7 +21,8 @@ static unsigned int spin_lock __nex_data = SPINLOCK_UNLOCK;
  * It is inefficient to call ROM_GetRndVector() every time we want 8 bits of
  * random data, so we will cache the unused values for latter use.
  */
-static uint8_t rng_cache[PLAT_RND_VECTOR_SZ] __nex_bss __aligned(8);
+static uint8_t rng_cache[PLAT_RND_VECTOR_SZ] __nex_bss \
+					__aligned(RCAR_CACHE_LINE_SZ);
 static uint8_t rng_cache_pos __nex_data = PLAT_RND_VECTOR_SZ;
 
 uint8_t hw_get_random_byte(void)
