@@ -30,7 +30,7 @@ FUNC __plat_call_romapi , : , .identity_map
 #ifdef CFG_CORE_ASLR
 	/*
 	 * We are running at identity location, so we can't use bl there,
-	 * becase assemlber will generate relative address to virt_to_phys(),
+	 * because assembler will generate relative address to virt_to_phys(),
 	 * which is not identity mapped. So we need to use absolute address.
 	 */
 	ldr	x9, =virt_to_phys
@@ -42,12 +42,18 @@ FUNC __plat_call_romapi , : , .identity_map
 
 	/* We about to disable MMU. Make sure that all writes reached memory */
 	mov     x0, #DCACHE_OP_CLEAN
+#ifdef CFG_CORE_ASLR
+	/* See the comment above */
+	ldr	x9, =dcache_op_all
+	blr	x9
+#else
 	bl	dcache_op_all
+#endif
 
 	/* Disable MMU */
 	mrs	x9, sctlr_el1
-	and	x9, x9, #(~SCTLR_M)
-	and	x9, x9, #(~SCTLR_C)
+	bic	x9, x9, #SCTLR_M
+	bic	x9, x9, #SCTLR_C
 	msr	sctlr_el1, x9
 	isb
 	/* Invalidate instruction cache and branch predictor */
@@ -70,8 +76,8 @@ FUNC __plat_call_romapi , : , .identity_map
 
 	/* Enable MMU */
 	mrs	x9, sctlr_el1
-	orr	x9, x9, #(SCTLR_M)
-	orr	x9, x9, #(SCTLR_C)
+	orr	x9, x9, #SCTLR_M
+	orr	x9, x9, #SCTLR_C
 	msr	sctlr_el1, x9
 	isb
 
