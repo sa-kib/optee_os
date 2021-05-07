@@ -70,9 +70,14 @@ static uint32_t plat_call_romapi(paddr_t func, uint64_t arg1,
 				 uint64_t arg3);
 
 		/*
-		 * __plat_call_romapi() is identity mapped and we should call it
-		 * at identity address, otherwise it will experience problem
-		 * when MMU will be disabled.
+		 * With ASLR enabled __plat_call_romapi() function will be
+		 * mapped at two addresses: at random address (with the rest of
+		 * OP-TEE) and at identity address. We need to map it at
+		 * identity address and call it at identity address because this
+		 * function turns off MMU to perform ROM API call. But
+		 * __plat_call_romapi *symbol* will be relocated by ASLR
+		 * code. To get identity address of the function we need to use
+		 * virt_to_phys().
 		 */
 		fptr = (void *)virt_to_phys(__plat_call_romapi);
 
