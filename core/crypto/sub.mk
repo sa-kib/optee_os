@@ -14,6 +14,7 @@ ifeq ($(CFG_WITH_SOFTWARE_PRNG),y)
 srcs-y += rng_fortuna.c
 else
 srcs-y += rng_hw.c
+srcs-y += rng_pta.c
 endif
 
 ifneq ($(CFG_CRYPTO_CBC_MAC_FROM_CRYPTOLIB),y)
