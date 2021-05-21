@@ -10,5 +10,10 @@ srcs-$(CFG_WITH_STATS) += stats.c
 srcs-$(CFG_SYSTEM_PTA) += system.c
 srcs-$(CFG_NXP_SE05X) += scp03.c
 srcs-$(CFG_SCMI_PTA) += scmi.c
+ifeq ($(CFG_WITH_SOFTWARE_PRNG),n)
+ifdef CFG_RNG_QUALITY
+srcs-$(CFG_HWRNG_PTA) += hwrng.c
+endif
+endif
 
 subdirs-y += bcm
