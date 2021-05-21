@@ -83,7 +83,7 @@
 #include <io.h>
 #include <string.h>
 #include <rng_pta.h>
-#include <rng_pta_client.h>
+#include <crypto/rng_pta_client.h>
 
 #define PTA_NAME "rng.pta"
 
