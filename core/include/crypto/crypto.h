@@ -198,6 +198,8 @@ TEE_Result crypto_acipher_alloc_ecc_keypair(struct ecc_keypair *s,
 void crypto_acipher_free_ecc_public_key(struct ecc_public_key *s);
 TEE_Result crypto_acipher_alloc_x25519_keypair(struct x25519_keypair *s,
 					       size_t key_size_bits);
+TEE_Result crypto_acipher_alloc_ed25519_keypair(struct x25519_keypair *s,
+					       size_t key_size_bits);
 
 /*
  * Key generation functions
@@ -208,6 +210,8 @@ TEE_Result crypto_acipher_gen_dh_key(struct dh_keypair *key, struct bignum *q,
 				     size_t xbits, size_t key_size);
 TEE_Result crypto_acipher_gen_ecc_key(struct ecc_keypair *key, size_t key_size);
 TEE_Result crypto_acipher_gen_x25519_key(struct x25519_keypair *key,
+					 size_t key_size);
+TEE_Result crypto_acipher_gen_ed25519_key(struct x25519_keypair *key,
 					 size_t key_size);
 
 TEE_Result crypto_acipher_dh_shared_secret(struct dh_keypair *private_key,
