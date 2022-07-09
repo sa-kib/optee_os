@@ -192,6 +192,7 @@
 #define TEE_ALG_ECDSA_P256                      0x70003041
 #define TEE_ALG_ECDSA_P384                      0x70004041
 #define TEE_ALG_ECDSA_P521                      0x70005041
+#define TEE_ALG_ED25519                         0x70006043
 #define TEE_ALG_ECDH_P192                       0x80001042
 #define TEE_ALG_ECDH_P224                       0x80002042
 #define TEE_ALG_ECDH_P256                       0x80003042
@@ -224,6 +225,8 @@
 #define TEE_TYPE_ECDSA_KEYPAIR              0xA1000041
 #define TEE_TYPE_ECDH_PUBLIC_KEY            0xA0000042
 #define TEE_TYPE_ECDH_KEYPAIR               0xA1000042
+#define TEE_TYPE_ED25519_PUBLIC_KEY         0xA0000043
+#define TEE_TYPE_ED25519_KEYPAIR            0xA1000043
 #define TEE_TYPE_SM2_DSA_PUBLIC_KEY         0xA0000045
 #define TEE_TYPE_SM2_DSA_KEYPAIR            0xA1000045
 #define TEE_TYPE_SM2_KEP_PUBLIC_KEY         0xA0000046
@@ -271,6 +274,8 @@
 #define TEE_ATTR_SM2_KEP_CONFIRMATION_OUT   0xD0000846
 #define TEE_ATTR_ECC_EPHEMERAL_PUBLIC_VALUE_X 0xD0000946 /* Missing in 1.2.1 */
 #define TEE_ATTR_ECC_EPHEMERAL_PUBLIC_VALUE_Y 0xD0000A46 /* Missing in 1.2.1 */
+#define TEE_ATTR_ED25519_PUBLIC_VALUE       0xD0000743
+#define TEE_ATTR_ED25519_PRIVATE_VALU       0xC0000843
 #define TEE_ATTR_X25519_PUBLIC_VALUE        0xD0000944
 #define TEE_ATTR_X25519_PRIVATE_VALUE       0xC0000A44
 
