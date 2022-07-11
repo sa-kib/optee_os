@@ -1,0 +1,11 @@
+#!/bin/sh
+make -j 17 \
+ PLATFORM=imx \
+ PLATFORM_FLAVOR=mx8qmmek \
+ CROSS_COMPILE=aarch64-linux-gnu- \
+ CROSS_COMPILE64=aarch64-linux-gnu- \
+ CFG_TEE_TA_LOG_LEVEL=0 \
+ CFG_TEE_CORE_LOG_LEVEL=0 \
+ CFG_VIRTUALIZATION=y \
+ CFG_NXP_CAAM=n \
+ CFG_CRYPTO_DRIVER=n CFG_CRYPTO_ED25519=y $1
