@@ -450,14 +450,14 @@ static
 const struct tee_cryp_obj_type_attrs tee_cryp_obj_ed25519_keypair_attrs[] = {
 	{
 	.attr_id = TEE_ATTR_ED25519_PRIVATE_VALUE,
-	.flags = TEE_TYPE_ATTR_REQUIRED,
+	.flags = TEE_TYPE_ATTR_REQUIRED | TEE_TYPE_ATTR_GEN_KEY_REQ,
 	.ops_index = ATTR_OPS_INDEX_25519,
 	RAW_DATA(struct x25519_keypair, priv)
 	},
 
 	{
 	.attr_id = TEE_ATTR_ED25519_PUBLIC_VALUE,
-	.flags = TEE_TYPE_ATTR_REQUIRED,
+	.flags = TEE_TYPE_ATTR_REQUIRED | TEE_TYPE_ATTR_GEN_KEY_REQ,
 	.ops_index = ATTR_OPS_INDEX_25519,
 	RAW_DATA(struct x25519_keypair, pub)
 	},
