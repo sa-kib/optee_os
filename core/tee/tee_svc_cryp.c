@@ -596,6 +596,10 @@ static const struct tee_cryp_obj_type_props tee_cryp_obj_props[] = {
 	     sizeof(struct x25519_keypair),
 	     tee_cryp_obj_x25519_keypair_attrs),
 
+	PROP(TEE_TYPE_ED25519_PUBLIC_KEY, 1, 256, 256,
+	     sizeof(struct x25519_keypair),
+	     tee_cryp_obj_ed25519_keypair_attrs),
+
 	PROP(TEE_TYPE_ED25519_KEYPAIR, 1, 256, 256,
 	     sizeof(struct x25519_keypair),
 	     tee_cryp_obj_ed25519_keypair_attrs),
@@ -1500,6 +1504,7 @@ TEE_Result tee_obj_set_type(struct tee_obj *o, uint32_t obj_type,
 							  max_key_size);
 		break;
 	case TEE_TYPE_ED25519_KEYPAIR:
+	case TEE_TYPE_ED25519_PUBLIC_KEY:
 		res = crypto_acipher_alloc_ed25519_keypair(o->attr,
 							  max_key_size);
 		break;
@@ -2412,6 +2417,8 @@ static TEE_Result tee_svc_cryp_check_key_type(const struct tee_obj *o,
 		break;
 	case TEE_MAIN_ALGO_ED25519:
 		req_key_type = TEE_TYPE_ED25519_KEYPAIR;
+		if (mode == TEE_MODE_VERIFY)
+			req_key_type2 = TEE_TYPE_ED25519_PUBLIC_KEY;
 		break;
 	case TEE_MAIN_ALGO_SM2_PKE:
 		if (mode == TEE_MODE_ENCRYPT)
